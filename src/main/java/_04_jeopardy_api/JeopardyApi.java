@@ -5,9 +5,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 /*
@@ -33,18 +30,27 @@ public class JeopardyApi {
 
         //1  Use the WebClient code from the previous exercises to make the request:
         //Note:
-        //The base URL has already been provided, but we we need to take the "value" parameter passed into
+        //The base URL has already been provided, but we need to take the "value" parameter passed into
         //this method and supply it as a query parameter with the name of "value".  This allows us to retrieve a question
         //with the specified point value.
         //
         //Make sure to save the response as type Clue[].class in the bodyToMono() method call
-
+        Mono<Clue[]> out = webClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("value", value)
+                        .build())
+                .retrieve()
+                .bodyToMono(Clue[].class);
         //2
         //Get a random number less than the size of the Clue array
+        Random r = new Random();
+        int index = r.nextInt(out.block().length)-1;
 
         //3
         //return the clue at the random index you just created
 
-        return null;
+        Clue fin = out.block()[r.nextInt()];
+        //api is no longer maintained
+        return fin;
     }
 }

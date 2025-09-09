@@ -34,10 +34,13 @@ public class CatFactsApi {
         Use the WebClient to make the request, converting the response to String.class.
         This request doesn't require url parameters, so you can omit the .uri() method call entirely
         */
+        Mono<String> stringMono = webClient.get()
+                //    .uri("")
+                .retrieve()
+                .bodyToMono(String.class);
 
-
-        //Collect the response from the Mono object
-
+        String response = stringMono.block();
+        System.out.println(response);
 
         /*
         Print out the actual JSON response -
@@ -62,9 +65,13 @@ public class CatFactsApi {
         //data_transfer_objects package (CatWrapper)
 
         //Use block() to collect the response into a java object using the class you just created
-
+        CatWrapper cw = webClient.get()
+                //.uri("https://meowfacts.herokuapp.com/")
+                .retrieve()
+                .bodyToMono(CatWrapper.class)
+                .block();
         //return the Object
-        return null;
+        return cw.getData().get(0);
 
 
     }
@@ -73,10 +80,14 @@ public class CatFactsApi {
         //use the getCatFact method to retrieve a cat fact
 
         //return the first (and only) String in the Arraylist of data in the response
-        return null;
+        return getCatFact();
     }
 
     public void setWebClient(WebClient webClient) {
         this.webClient = webClient;
+    }
+
+    public void syso(Object t){
+        System.out.println(t);
     }
 }

@@ -5,11 +5,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+//@Generated("jsonschema2pojo")
 public class CatWrapper {
 
     @SerializedName("data")
     @Expose
-    private List<String> data = null;
+    private List<String> data;
 
     public List<String> getData() {
         return data;
@@ -18,6 +19,8 @@ public class CatWrapper {
     public void setData(List<String> data) {
         this.data = data;
     }
+
+}
 
     /*
     This class could simply be defined as below, but the above code is what is supplied by jsonschema2pojo.com:
@@ -29,4 +32,4 @@ public class CatWrapper {
     }
     */
 
-}
+
