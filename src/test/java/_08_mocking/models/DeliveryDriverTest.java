@@ -60,7 +60,7 @@ boolean expected = true;
 when(driver.refuel(85)).thenReturn(true);
 boolean actual = driver.refuel(85);
         //then
-        assertEquals(expected, actual);
+        assertEquals(expected,  actual);
     }
 
     @Test
